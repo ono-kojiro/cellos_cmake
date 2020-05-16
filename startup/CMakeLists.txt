@@ -1,7 +1,5 @@
 project(startup LANGUAGES ASM C)
 
-set(CELLOS_ROOT ${CMAKE_SOURCE_DIR}/../cellos)
-
 set(LINKERSCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/cellos.lds)
 
 set(CMAKE_ASM_LINK_FLAGS "")
@@ -13,7 +11,7 @@ set(CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> <DEFINES> <INCLUDES> <FLAGS> 
 set(CMAKE_ASM_LINK_EXECUTABLE "<CMAKE_LINKER> <CMAKE_ASM_LINK_FLAGS> -o <TARGET> <OBJECTS> <LINK_LIBRARIES>")
 
 add_executable(${PROJECT_NAME}
-	${CELLOS_ROOT}/src/arch/ppc32/ppc405/cellStartup.S
+	${CELLOS_ROOT}/arch/ppc32/ppc405/cellStartup.S
 )
 
 
@@ -25,15 +23,15 @@ target_compile_definitions(${PROJECT_NAME}
 target_compile_definitions(${PROJECT_NAME} PUBLIC -DTEXT_BASE=0x0)
 
 target_include_directories(${PROJECT_NAME}
-    PUBLIC ${CELLOS_ROOT}/src/arch/ppc32/ppc405/include
-    PUBLIC ${CELLOS_ROOT}/src/arch/ppc32/ppc405
-    PUBLIC ${CELLOS_ROOT}/src/arch/ppc32/ppc405/platforms/taihu
-    PUBLIC ${CELLOS_ROOT}/src/include
-    PUBLIC ${CELLOS_ROOT}/src/kernel
-    PUBLIC ${CELLOS_ROOT}/src/lib
-    PUBLIC ${CELLOS_ROOT}/src/drivers
-    PUBLIC ${CELLOS_ROOT}/src/drivers/serial
-    PUBLIC ${CELLOS_ROOT}/src/tools
+    PUBLIC ${CELLOS_ROOT}/arch/ppc32/ppc405/include
+    PUBLIC ${CELLOS_ROOT}/arch/ppc32/ppc405
+    PUBLIC ${CELLOS_ROOT}/arch/ppc32/ppc405/platforms/taihu
+    PUBLIC ${CELLOS_ROOT}/include
+    PUBLIC ${CELLOS_ROOT}/kernel
+    PUBLIC ${CELLOS_ROOT}/lib
+    PUBLIC ${CELLOS_ROOT}/drivers
+    PUBLIC ${CELLOS_ROOT}/drivers/serial
+    PUBLIC ${CELLOS_ROOT}/tools
 )
 
 target_compile_options(${PROJECT_NAME}

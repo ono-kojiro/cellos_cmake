@@ -2,8 +2,6 @@ project(bootrom LANGUAGES C ASM)
 
 set(CMAKE_LINKER "powerpc-eabi-ld")
 
-set(CELLOS_ROOT ${CMAKE_SOURCE_DIR}/../cellos)
-
 set(LINKERSCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/linkerscript.ld)
 
 set(CMAKE_ASM_COMPILER ${AS})
@@ -13,7 +11,7 @@ set(CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> -o <OBJECT> <SOURCE>")
 set(CMAKE_ASM_LINK_EXECUTABLE "<CMAKE_LINKER> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
 
 add_executable(${PROJECT_NAME}
-	${CELLOS_ROOT}/src/arch/ppc32/ppc405/boot/bootrom.S
+	${CELLOS_ROOT}/arch/ppc32/ppc405/boot/bootrom.S
 )
 
 #target_compile_definitions(${PROJECT_NAME}
