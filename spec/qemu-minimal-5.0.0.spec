@@ -115,6 +115,7 @@ run_configure() {
 		--disable-sdl \
 		--enable-curl \
 		--enable-curses \
+		--disable-smartcard \
 		--python=/usr/bin/python3 \
 		"$@"
 }
