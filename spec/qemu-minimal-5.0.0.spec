@@ -14,10 +14,36 @@ License: GPL
 URL: http://qemu.org/
 Source0: http://wiki.qemu-project.org/download/qemu-%{version}.tar.xz
 
+# guest agent service
+Source10: qemu-guest-agent.service
+Source17: qemu-ga.sysconfig
+# guest agent udev rules
+Source11: 99-qemu-guest-agent.rules
+# /etc/qemu/bridge.conf
+Source12: bridge.conf
+# qemu-kvm back compat wrapper installed as /usr/bin/qemu-kvm
+Source13: qemu-kvm.sh
+# PR manager service
+Source14: qemu-pr-helper.service
+Source15: qemu-pr-helper.socket
+# /etc/modprobe.d/kvm.conf, for x86
+Source20: kvm-x86.modprobe.conf
+# /etc/security/limits.d/95-kvm-ppc64-memlock.conf
+Source21: 95-kvm-ppc64-memlock.conf
+
+# Fix iouring hang (bz #1823751)
+# https://lists.gnu.org/archive/html/qemu-devel/2020-05/msg02728.html
+Patch0001: 0001-aio-posix-don-t-duplicate-fd-handler-deletion-in-fdm.patch
+Patch0002: 0002-aio-posix-disable-fdmon-io_uring-when-GSource-is-use.patch
+
+
+
 %global have_rbd 0
 
 
 BuildRequires: gcc zlib-devel ncurses-devel glib2-devel libssh-devel curl-devel
+BuildRequires: bzip2-devel libxml2-devel
+BuildRequires: nettle-devel
 BuildRequires: pixman-devel >= 0.21.8
 Requires: zlib ncurses glib2 libssh
 
@@ -98,6 +124,7 @@ This package provides the system emulator for PPC and PPC64 systems.
 
 %prep
 %setup -q -n %{name}-%{version}
+%autopatch -p1
 
 %build
 		
@@ -115,7 +142,6 @@ run_configure() {
 		--disable-sdl \
 		--enable-curl \
 		--enable-curses \
-		--disable-smartcard \
 		--python=/usr/bin/python3 \
 		"$@"
 }
