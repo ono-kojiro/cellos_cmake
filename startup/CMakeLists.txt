@@ -46,9 +46,9 @@ target_compile_options(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-	PUBLIC -L/opt/powerpc-eabi/lib/gcc/powerpc-eabi/4.3.1/nof
-	PUBLIC -L/opt/powerpc-eabi/powerpc-eabi/lib
-	PUBLIC /opt/powerpc-eabi/powerpc-eabi/lib/libstdc++.a
+	PUBLIC -L/opt/${cross}/lib/gcc/${cross}/${cross_version}/nof
+	PUBLIC -L/opt/${cross}/${cross}/lib
+	PUBLIC /opt/${cross}/${cross}/lib/libstdc++.a
 	PUBLIC -lm
 	PUBLIC ${CMAKE_BINARY_DIR}/kernel/libkernel.a
 	PUBLIC ${CMAKE_BINARY_DIR}/driver/libdriver.a
