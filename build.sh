@@ -8,6 +8,8 @@ source ./powerpc-eabi-gcc.bashrc
 
 RSYNC="rsync -rlOtcv"
 
+echo TARGETS is $TARGETS
+
 usage()
 {
 	echo "usage : $0 [options] target1 target2 ..."
@@ -107,7 +109,7 @@ if [ "x$logfile" != "x" ]; then
 	echo logfile is $logfile
 fi
 
-for target in "$@" ; do
+for target in "$@ $TARGETS" ; do
 	type -t $target
 	res=`type -t $target | grep function`
 	if [ "$res" = "function" ]; then
