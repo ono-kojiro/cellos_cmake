@@ -30,7 +30,7 @@ config()
 build()
 {
 	pushd $top_dir
-	make
+	cmake --build . -- all
 	popd
 }
 
@@ -39,8 +39,7 @@ kernel()
 	pushd $top_dir
 	rm -f CMakeCache.txt
 	config
-	make kernel
-	$RSYNC $top_dir/kernel/ /home/share/cellos_cmake_bin/kernel/
+	cmake --build . -- clean kernel
 	popd
 }
 
@@ -49,8 +48,7 @@ driver()
 	pushd $top_dir
 	rm -f CMakeCache.txt
 	config
-	make driver
-	$RSYNC -av $top_dir/driver/ /home/share/cellos_cmake_bin/driver
+	cmake --build . -- clean driver
 	popd
 }
 
@@ -59,8 +57,7 @@ cellos()
 	pushd $top_dir
 	rm -f CMakeCache.txt
 	config
-	make cellos
-	$RSYNC -av $top_dir/cellos/ /home/share/cellos_cmake_bin/cellos
+	cmake --build . -- clean cellos
 	popd
 }
 
@@ -69,8 +66,7 @@ bootrom()
 	pushd $top_dir
 	rm -f CMakeCache.txt
 	config
-	make bootrom
-	$RSYNC -av $top_dir/bootrom/ /home/share/cellos_cmake_bin/bootrom
+	cmake --build . -- clean bootrom
 	popd
 }
 
@@ -79,14 +75,13 @@ startup()
 	pushd $top_dir
 	rm -f CMakeCache.txt
 	config
-	make startup
-	$RSYNC -av $top_dir/startup/ /home/share/cellos_cmake_bin/startup
+	cmake --build . -- clean startup
 	popd
 }
 
 clean()
 {
-	make clean
+	cmake --build . -- clean
 }
 
 
