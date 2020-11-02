@@ -25,7 +25,7 @@ all()
 config()
 {
 	pushd $top_dir
-	cmake .
+	cmake -G "Unix Makefiles" .
 	popd
 }
 
