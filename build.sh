@@ -4,7 +4,7 @@
 top_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd $top_dir
-source ./powerpc-eabi-gcc.bashrc
+#source ./powerpc-eabi-gcc.bashrc
 
 RSYNC="rsync -rlOtcv"
 
@@ -90,6 +90,13 @@ clean()
 {
 	cmake --build . -- clean
 }
+
+mclean()
+{
+	rm -rf CMakeFiles
+	rm -f CMakeCache.txt
+}
+
 
 
 logfile=""

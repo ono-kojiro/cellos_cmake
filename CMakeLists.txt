@@ -27,23 +27,27 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_COLOR_MAKEFILE OFF)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+### ronetix powerpc-eabi-gcc
 set(cross "powerpc-eabi")
-#set(cross "powerpc-unknown-eabi")
 set(cross_version "4.3.1")
-#set(cross_version "8.3.0")
+
+#set(cross "powerpc-none-eabi")
+#set(cross_version "9.2.0")
 
 find_program(CC "${cross}-gcc")
 find_program(AS "${cross}-as")
 find_program(LD "${cross}-ld")
 find_program(OBJCOPY "${cross}-objcopy")
 
+message(STATUS "CC : ${CC}")
+
 get_filename_component(GCC_BIN_DIR ${CC} DIRECTORY)
 set(LIBGCC_DIR "${GCC_BIN_DIR}")
 string(APPEND LIBGCC_DIR "/../lib/gcc/${cross}/${cross_version}/nof")
 
-#set(CMAKE_C_COMPILER ${CC} CACHE STRING "${cross}-gcc" FORCE)
-#set(CMAKE_AS_COMPILER ${AS} CACHE STRING "${cross}-as" FORCE)
-#set(CMAKE_LINKER ${LD} CACHE STRING "${cross}-ld" FORCE)
+set(CMAKE_C_COMPILER ${CC} CACHE STRING "${cross}-gcc" FORCE)
+set(CMAKE_AS_COMPILER ${AS} CACHE STRING "${cross}-as" FORCE)
+set(CMAKE_LINKER ${LD} CACHE STRING "${cross}-ld" FORCE)
 
 set(CMAKE_C_LINK_EXECUTABLE "<CMAKE_LINKER> <CMAKE_C_LINK_FLAGS> -o <TARGET> <LINK_FLAGS> <OBJECTS> <LINK_LIBRARIES>")
 set(CMAKE_AS_LINK_EXECUTABLE "<CMAKE_LINKER> <CMAKE_C_LINK_FLAGS> -o <TARGET> <LINK_FLAGS> <OBJECTS> <LINK_LIBRARIES>")
