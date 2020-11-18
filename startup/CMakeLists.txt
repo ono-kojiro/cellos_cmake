@@ -60,7 +60,7 @@ set_target_properties(startup PROPERTIES OUTPUT_NAME "cellos.elf")
 
 add_custom_command(TARGET ${PROJECT_NAME}
 	POST_BUILD
-	COMMAND powerpc-eabi-objcopy -O binary cellos.elf cellos.bin
+	COMMAND ${OBJCOPY} -O binary cellos.elf cellos.bin
 )
 
 set_directory_properties(
