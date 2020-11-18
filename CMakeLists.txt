@@ -37,6 +37,10 @@ find_program(AS "${cross}-as")
 find_program(LD "${cross}-ld")
 find_program(OBJCOPY "${cross}-objcopy")
 
+get_filename_component(GCC_BIN_DIR ${CC} DIRECTORY)
+set(LIBGCC_DIR "${GCC_BIN_DIR}")
+string(APPEND LIBGCC_DIR "/../lib/gcc/${cross}/${cross_version}/nof")
+
 #set(CMAKE_C_COMPILER ${CC} CACHE STRING "${cross}-gcc" FORCE)
 #set(CMAKE_AS_COMPILER ${AS} CACHE STRING "${cross}-as" FORCE)
 #set(CMAKE_LINKER ${LD} CACHE STRING "${cross}-ld" FORCE)

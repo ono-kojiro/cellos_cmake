@@ -46,9 +46,7 @@ target_compile_options(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-	PUBLIC -L/opt/${cross}/lib/gcc/${cross}/${cross_version}/nof
-	PUBLIC -L/opt/${cross}/${cross}/lib
-	PUBLIC /opt/${cross}/${cross}/lib/libstdc++.a
+	PUBLIC -L${LIBGCC_DIR}
 	PUBLIC -lm
 	PUBLIC ${CMAKE_BINARY_DIR}/kernel/libkernel.a
 	PUBLIC ${CMAKE_BINARY_DIR}/driver/libdriver.a
