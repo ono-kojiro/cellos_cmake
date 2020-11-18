@@ -81,6 +81,11 @@ startup()
 	popd
 }
 
+qemu()
+{
+	cmake --build . -- qemu
+}
+
 clean()
 {
 	cmake --build . -- clean

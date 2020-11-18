@@ -29,7 +29,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(cross "powerpc-eabi")
 #set(cross "powerpc-unknown-eabi")
-set(cross_version "4.3.3")
+set(cross_version "4.3.1")
 #set(cross_version "8.3.0")
 
 find_program(CC "${cross}-gcc")
