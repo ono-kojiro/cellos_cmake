@@ -17,9 +17,9 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 #   message(FATAL_ERROR "In-source builds are not allowed.")
 #endif("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 
-set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_NAME None)
 
-project(cellos_cmake)
+project(cellos_cmake C)
 set(PROJECT_VERSION 1.0.0)
 
 set(CMAKE_BUILD_TYPE Debug)
