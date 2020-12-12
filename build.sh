@@ -4,7 +4,6 @@
 top_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd $top_dir
-source ./powerpc-eabi-gcc.bashrc
 
 echo TARGETS is $TARGETS
 

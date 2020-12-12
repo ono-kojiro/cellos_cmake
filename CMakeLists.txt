@@ -7,10 +7,10 @@ set(CMAKE_SYSTEM_NAME Generic)
 
 project(cellos C)
 
-#set(cross "powerpc-none-eabi")
-#set(cross_version "9.2.0")
-set(cross "powerpc-eabi")
-set(cross_version "4.3.1")
+set(cross "powerpc-none-eabi")
+set(cross_version "9.2.0")
+#set(cross "powerpc-eabi")
+#set(cross_version "4.3.1")
 
 find_program(CC "${cross}-gcc")
 find_program(AS "${cross}-as")
