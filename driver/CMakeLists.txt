@@ -5,8 +5,8 @@ add_library(${PROJECT_NAME}
 )
 
 target_compile_definitions(${PROJECT_NAME}
-	PUBLIC $<$<COMPILE_LANGUAGE:C>:__KERNEL__>
-	PUBLIC $<$<COMPILE_LANGUAGE:ASM>:__ASSEMBLY__>
+	PUBLIC __KERNEL__
+	PUBLIC TEXT_BASE=0x0
 )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC -DTEXT_BASE=0x0)
@@ -29,14 +29,8 @@ target_compile_options(${PROJECT_NAME}
 	PUBLIC -fno-exceptions
 	PUBLIC -fno-builtin
 	PUBLIC -msoft-float
-	PUBLIC $<$<COMPILE_LANGUAGE:ASM>:-Xassembler>
-	PUBLIC $<$<COMPILE_LANGUAGE:ASM>:-m405>
-	PUBLIC $<$<COMPILE_LANGUAGE:ASM>:-mregnames>
-)
-
-set_source_files_properties(
-	${CELLOS_ROOT}/drivers/serial/ppc4xxSerial.c
-	APPEND PROPERTY COMPILE_FLAGS "-Os -O2"
+	PUBLIC -Os
+	PUBLIC -O2
 )
 
 #add_custom_command(TARGET ${PROJECT_NAME}

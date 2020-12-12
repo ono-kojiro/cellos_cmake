@@ -4,9 +4,7 @@
 top_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd $top_dir
-#source ./powerpc-eabi-gcc.bashrc
-
-RSYNC="rsync -rlOtcv"
+source ./powerpc-eabi-gcc.bashrc
 
 echo TARGETS is $TARGETS
 
@@ -125,7 +123,6 @@ for target in "$@ $TARGETS" ; do
 	type -t $target
 	res=`type -t $target | grep function`
 	if [ "$res" = "function" ]; then
-		echo $target is function
 		$target
 	else
 		make $target

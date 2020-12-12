@@ -1,29 +1,14 @@
-project(bootrom LANGUAGES C ASM)
-
-set(CMAKE_LINKER "powerpc-eabi-ld")
-
-set(LINKERSCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/linkerscript.ld)
-
-set(CMAKE_ASM_COMPILER ${AS})
-set(CMAKE_LINKER ${LD})
+project(bootrom LANGUAGES ASM)
 
 set(CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> -o <OBJECT> <SOURCE>")
-set(CMAKE_ASM_LINK_EXECUTABLE "<CMAKE_LINKER> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
+
+set(LINKERSCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/bootrom.ld)
 
 add_executable(${PROJECT_NAME}
 	${CELLOS_ROOT}/arch/ppc32/ppc405/boot/bootrom.S
 )
 
-#target_compile_definitions(${PROJECT_NAME}
-#	PUBLIC $<$<COMPILE_LANGUAGE:C>:__KERNEL__>
-#	PUBLIC $<$<COMPILE_LANGUAGE:ASM>:__ASSEMBLY__>
-#)
-
-#target_compile_definitions(${PROJECT_NAME} PUBLIC -DTEXT_BASE=0x0)
-
-#target_include_directories(${PROJECT_NAME}
-#    PUBLIC ${CELLOS_ROOT}/src/arch/ppc32/ppc405/include
-#)
+set(CMAKE_ASM_COMPILE_FLAGS "")
 
 target_link_libraries(${PROJECT_NAME}
 	PUBLIC --script=${LINKERSCRIPT}
@@ -35,5 +20,4 @@ add_custom_command(TARGET ${PROJECT_NAME}
 	POST_BUILD
 	COMMAND powerpc-eabi-objcopy -O binary bootrom.elf ppc405_rom.bin
 )
-
 
