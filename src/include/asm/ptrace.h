@@ -40,7 +40,7 @@ struct pt_regs {
 	PPC_REG dar;		/* Fault registers */
 	PPC_REG dsisr;
 	PPC_REG result;		/* Result of a system call */
-}__attribute__((packed)) CELL_STACK_FRAME_t;
+};
 #endif
 
 #define STACK_FRAME_OVERHEAD	16	/* size of minimum stack frame */

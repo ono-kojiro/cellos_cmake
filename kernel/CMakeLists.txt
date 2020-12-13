@@ -5,6 +5,7 @@ add_library(${PROJECT_NAME}
 	${CELLOS_ROOT}/kernel/cellMain.c
 	byteorder.c
 	bitops.c
+	ptrace.c
 )
 
 
