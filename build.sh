@@ -1,7 +1,8 @@
 #!/bin/sh
 
 
-top_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+#top_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+top_dir="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 
 cd $top_dir
 
@@ -21,9 +22,10 @@ all()
 
 config()
 {
-	pushd $top_dir
+	cwd=`pwd`
+	cd $top_dir
 	cmake -G "Unix Makefiles" .
-	popd
+	cd $cwd
 }
 
 build()
@@ -119,9 +121,10 @@ if [ "x$logfile" != "x" ]; then
 fi
 
 for target in "$@ $TARGETS" ; do
-	type -t $target
-	res=`type -t $target | grep function`
-	if [ "$res" = "function" ]; then
+	type $target | grep function
+	res=$?
+	echo res is $res
+	if [ "x$res" = "x0" ]; then
 		$target
 	else
 		make $target

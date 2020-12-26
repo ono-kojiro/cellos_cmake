@@ -8,8 +8,8 @@ while getopts o: OPT; do
 done
 shift $((OPTIND - 1))
 
-argv=("$@")
-argc=$#
+#argv=("$@")
+#argc=$#
 
 echo OUTPUT is $OUTPUT
 
