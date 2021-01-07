@@ -30,9 +30,10 @@ config()
 
 build()
 {
-	pushd $top_dir
+	cwd=`pwd`
+	cd $top_dir
 	cmake --build . -- all
-	popd
+	cd $cwd
 }
 
 kernel()
@@ -121,7 +122,8 @@ if [ "x$logfile" != "x" ]; then
 fi
 
 for target in "$@ $TARGETS" ; do
-	type $target | grep function
+    #echo target is "$target"
+	LANG=C type $target | grep function
 	res=$?
 	echo res is $res
 	if [ "x$res" = "x0" ]; then
