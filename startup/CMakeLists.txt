@@ -4,15 +4,25 @@ set(CMAKE_ASM_COMPILER ${CC})
 
 set(LDSCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/cellos.ld)
 
+set(ASM_SOURCES
+    ${CELLOS_ROOT}/arch/ppc32/ppc405/cellStartup.S
+)
+
 add_executable(${PROJECT_NAME}
-	${CELLOS_ROOT}/arch/ppc32/ppc405/cellStartup.S
+	${ASM_SOURCES}
+)
+
+set_source_files_properties(${ASM_SOURCES}
+    PROPERTIES LANGUAGE C
+)
+
+set_source_files_properties(${ASM_SOURCES}
+    PROPERTIES COMPILE_DEFINITIONS __ASSEMBLY__
 )
 
 target_compile_definitions(${PROJECT_NAME}
-	PUBLIC __ASSEMBLY__
+    PUBLIC -DTEXT_BASE=0x0
 )
-
-target_compile_definitions(${PROJECT_NAME} PUBLIC -DTEXT_BASE=0x0)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${CELLOS_ROOT}/arch/ppc32/ppc405/include
@@ -38,10 +48,10 @@ target_compile_options(${PROJECT_NAME}
 )
 	
 # cmake 3.11 has no target_link_options.
-set(CMAKE_ASM_LINK_FLAGS "")
-set(CMAKE_ASM_LINK_FLAGS "${CMAKE_ASM_LINK_FLAGS} -g")
-set(CMAKE_ASM_LINK_FLAGS "${CMAKE_ASM_LINK_FLAGS} --script=${LDSCRIPT}")
-set(CMAKE_ASM_LINK_FLAGS "${CMAKE_ASM_LINK_FLAGS} -Ttext 0x0")
+set(CMAKE_C_LINK_FLAGS "")
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -g")
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} --script=${LDSCRIPT}")
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -Ttext 0x0")
 #set(CMAKE_ASM_LINK_FLAGS "${CMAKE_ASM_LINK_FLAGS} -lstdc++")
 
 target_link_libraries(${PROJECT_NAME}
