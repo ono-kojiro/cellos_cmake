@@ -18,6 +18,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "bootrom.elf")
 
 add_custom_command(TARGET ${PROJECT_NAME}
 	POST_BUILD
-	COMMAND ${cross}-objcopy -O binary bootrom.elf ppc405_rom.bin
+	COMMAND ${OBJCOPY} -O binary bootrom.elf ppc405_rom.bin
 )
 

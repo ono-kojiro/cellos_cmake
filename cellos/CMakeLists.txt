@@ -27,6 +27,10 @@ set(ASM_SOURCES
 	${CELLOS_ROOT}/lib/ticks.S
 )
 
+set_source_files_properties(${ASM_SOURCES}
+    PROPERTIES LANGUAGE C
+)
+
 add_library(${PROJECT_NAME}
     ${C_SOURCES}
     ${ASM_SOURCES}
