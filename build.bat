@@ -16,6 +16,8 @@ SET PATH=C:\opt\cmake-3.18.4-win64-x64\bin;%PATH%
 
 SET PATH=C:\opt\powerpc-eabi\bin;%PATH%
 
+SET PATH=C:\opt\qemu-5.1.0;%PATH%
+
 IF "x%1" == "x" (
 	CALL :ALL
 	REM disable echo because subroutine might enable echo
@@ -59,10 +61,10 @@ REM === Config
 REM ===============================
 :CONFIG
 cmake -G "Unix Makefiles" ^
-	-D CMAKE_C_COMPILER=powerpc-eabi-gcc ^
-	-D CMAKE_AS_COMPILER=powerpc-eabi-as ^
-	-D CMAKE_OBJCOPY=powerpc-eabi-objcopy ^
-	-D CMAKE_LINKER=powerpc-eabi-ld ^
+	-D CMAKE_C_COMPILER=C:/opt/powerpc-eabi/bin/powerpc-eabi-gcc ^
+	-D CMAKE_ASM_COMPILER=C:/opt/powerpc-eabi/bin/powerpc-eabi-as ^
+	-D CMAKE_OBJCOPY=C:/opt/powerpc-eabi/bin/powerpc-eabi-objcopy ^
+	-D CMAKE_LINKER=C:/opt/powerpc-eabi/bin/powerpc-eabi-ld ^
 	.
 @GOTO :EOF
 
@@ -94,7 +96,9 @@ REM ===============================
 :TEST
 ECHO This is test.
 CALL sub1.bat
-@GOTO :EOF
+@ECHO OFF
+
+GOTO :EOF
 
 REM ===============================
 REM === Help
